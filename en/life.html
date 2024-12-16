@@ -4,34 +4,34 @@
 <script src="../js/IE.js"></script>
 <![endif]-->
 
-<html lang="cn">
+<html lang="en">
 	<head>
-		<title>xiaoyao space - 生活</title>
+		<title>xiaoyao space - Life</title>
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
 		<!--[if !IE]>--><link rel="stylesheet" type="text/css" href="../css/not_IE.css"><!--<![endif]-->
 		<link rel="shortcut icon" type="image/x-icon" href="../img/ilogo.bmp" media="screen" />
 		<style>
-			/* 照片墙布局 */
+			/* Photo wall layout */
 			.photo-wall {
 				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 自动调整列 */
-				grid-gap: 16px; /* 照片间隙 */
+				grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Auto adjust columns */
+				grid-gap: 16px; /* Space between photos */
 				padding: 16px;
 			}
 
-			/* 为了使图片具有相同的高度，但不裁切 */
+			/* To ensure images have the same height, but without cropping */
 			.photo-wall img {
 				width: 100%; 
-				height: 300px;  /* 固定高度 */
-				object-fit: contain; /* 保持图片完整显示，不裁切 */
+				height: 300px;  /* Fixed height */
+				object-fit: contain; /* Keep the image fully displayed without cropping */
 				border-radius: 8px;
 			}
 
-			/* 响应式：小屏设备调整为单列显示 */
+			/* Responsive: Adjust to single column for small screens */
 			@media (max-width: 600px) {
 				.photo-wall {
-					grid-template-columns: 1fr; /* 变成单列 */
+					grid-template-columns: 1fr; /* Switch to single column */
 				}
 			}
 		</style>
@@ -48,24 +48,15 @@
 		<br>
 		<script src="nav.js"></script>
 		<br>
-		<h2>我制作的美食展示</h2>
+		<h2>Food I Made</h2>
 		<div class="photo-wall">
-			<img src="../life/food1.jpg" alt="美食1">
-			<img src="../life/food2.jpg" alt="美食2">
-			<img src="../life/food3.jpg" alt="美食3">
-			<img src="../life/food4.jpg" alt="美食4">
-			<img src="../life/food5.jpg" alt="美食5">
-			<img src="../life/food6.jpg" alt="美食6">
+			<img src="../life/food1.jpg" alt="Food 1">
+			<img src="../life/food2.jpg" alt="Food 2">
+			<img src="../life/food3.jpg" alt="Food 3">
+			<img src="../life/food4.jpg" alt="Food 4">
+			<img src="../life/food5.jpg" alt="Food 5">
+			<img src="../life/food6.jpg" alt="Food 6">
 		</div>
-
-		<!-- <br>
-		<h2>我的绘画作品</h2>
-		<div class="photo-wall">
-			<img src="../life/painting1.jpg" alt="绘画1">
-			<img src="../life/painting2.jpg" alt="绘画2">
-			<img src="../life/painting3.jpg" alt="绘画3">
-			<img src="../life/painting4.jpg" alt="绘画4">
-		</div> -->
 
 		<br>
 	</body>
