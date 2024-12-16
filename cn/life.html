@@ -20,11 +20,11 @@
 				padding: 16px;
 			}
 
-			/* 为了使图片具有相同的高度 */
+			/* 为了使图片具有相同的高度，但不裁切 */
 			.photo-wall img {
 				width: 100%; 
 				height: 300px;  /* 固定高度 */
-				object-fit: cover; /* 保持图片比例，填满容器 */
+				object-fit: contain; /* 保持图片完整显示，不裁切 */
 				border-radius: 8px;
 			}
 
@@ -41,26 +41,22 @@
 		<br>
 		<h2>我制作的美食展示</h2>
 		<div class="photo-wall">
-			<!-- 这里是约 8 张美食照片 -->
-			<!-- <img src="../life/food1.jpg" alt="美食1">
+			<img src="../life/food1.jpg" alt="美食1">
 			<img src="../life/food2.jpg" alt="美食2">
 			<img src="../life/food3.jpg" alt="美食3">
 			<img src="../life/food4.jpg" alt="美食4">
 			<img src="../life/food5.jpg" alt="美食5">
 			<img src="../life/food6.jpg" alt="美食6">
-			<img src="../life/food7.jpg" alt="美食7">
-			<img src="../life/food8.jpg" alt="美食8"> -->
 		</div>
 
-		<br>
+		<!-- <br>
 		<h2>我的绘画作品</h2>
 		<div class="photo-wall">
-			<!-- 这里是约 4 张绘画作品 -->
-			<!-- <img src="../life/painting1.jpg" alt="绘画1">
+			<img src="../life/painting1.jpg" alt="绘画1">
 			<img src="../life/painting2.jpg" alt="绘画2">
 			<img src="../life/painting3.jpg" alt="绘画3">
-			<img src="../life/painting4.jpg" alt="绘画4"> -->
-		</div>
+			<img src="../life/painting4.jpg" alt="绘画4">
+		</div> -->
 
 		<br>
 	</body>
