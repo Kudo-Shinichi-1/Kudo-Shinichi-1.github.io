@@ -11,24 +11,60 @@
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
 		<!--[if !IE]>--><link rel="stylesheet" type="text/css" href="../css/not_IE.css"><!--<![endif]-->
 		<link rel="shortcut icon" type="image/x-icon" href="../img/ilogo.bmp" media="screen" />
+		<style>
+			/* 照片墙布局 */
+			.photo-wall {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 自动调整列 */
+				grid-gap: 16px; /* 照片间隙 */
+				padding: 16px;
+			}
+
+			/* 为了使图片具有相同的高度 */
+			.photo-wall img {
+				width: 100%; 
+				height: 300px;  /* 固定高度 */
+				object-fit: cover; /* 保持图片比例，填满容器 */
+				border-radius: 8px;
+			}
+
+			/* 响应式：小屏设备调整为单列显示 */
+			@media (max-width: 600px) {
+				.photo-wall {
+					grid-template-columns: 1fr; /* 变成单列 */
+				}
+			}
+		</style>
 	</head>
 	<body>
-<!-- 		<div align="right">
-			<nav>
-   	 		<ul>
-   	     		<li><a href="../en/starcharts.html">English</a></li>
-     	   		<li><a href="../cn/starcharts.html">中文</a></li>
-    			</ul>
-			</nav>
-		</div> -->
-<!-- 		<br> -->
 		<script src="nav.js"></script>
 		<br>
-		<h2>生活照</h2>
-			<!-- <center><img src="../life/喵喵.jpg" alt="" width="50%" /></center>
-			<center>2024年10月1日与女朋友在湛江</center> -->
+		<h2>我制作的美食展示</h2>
+		<div class="photo-wall">
+			<!-- 这里是约 8 张美食照片 -->
+			<img src="../life/food1.jpg" alt="美食1">
+			<img src="../life/food2.jpg" alt="美食2">
+			<img src="../life/food3.jpg" alt="美食3">
+			<img src="../life/food4.jpg" alt="美食4">
+			<img src="../life/food5.jpg" alt="美食5">
+			<img src="../life/food6.jpg" alt="美食6">
+			<img src="../life/food7.jpg" alt="美食7">
+			<img src="../life/food8.jpg" alt="美食8">
+		</div>
+
+		<br>
+		<h2>我的绘画作品</h2>
+		<div class="photo-wall">
+			<!-- 这里是约 4 张绘画作品 -->
+			<img src="../life/painting1.jpg" alt="绘画1">
+			<img src="../life/painting2.jpg" alt="绘画2">
+			<img src="../life/painting3.jpg" alt="绘画3">
+			<img src="../life/painting4.jpg" alt="绘画4">
+		</div>
+
 		<br>
 	</body>
+
 	<footer>
 		<br><br><br><br>
 		<table class="bc" align="center";>
@@ -38,9 +74,6 @@
 					<script type="text/javascript">var ip_widget_var = ip_widget_var || [];ip_widget("rgb(223,228,196)","rgb(209,215,181)","rgb(223,228,196)",0,0,800);</script>
 					<noscript><a href="https://ipaddress.is">IP Address Lookup</a></noscript>
 				</th>
-<!-- 				<th>
-					&nbsp;&nbsp;&nbsp;<script type="text/javascript" src="https://widget.supercounters.com/ssl/hit.js"></script><script type="text/javascript">sc_hit(1206227,142,6);</script><br><noscript><a href="https://www.supercounters.com" target="_blank">Tumblr Hit Counter</a></noscript>
-				</th> -->
 			</tr>
 		</table>
 	</footer>
