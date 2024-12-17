@@ -33,6 +33,9 @@ a:hover {
 p {
 	font-size: 1.2em;
 	line-height: 1.5em;
+}  
+.indent {
+	text-indent: 2em;  /* 仅对带有.indent类的段落应用首行缩进 */
 }
 ul li {
 	font-size: 1.2em;
