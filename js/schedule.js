@@ -81,12 +81,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   
     tableContainer.appendChild(table);
   }
+  // 获取用户当地今天字符串 'YYYY-MM-DD'
+  const todayStr = new Date().toISOString().slice(0,10);
   
   function buildDayCell(dayObj, isFirstDay) {
     // dayObj: { date, year, month, day, weekday, 排班摘要, work_people, rest_people, ... }
     // isFirstDay: boolean，表示整个排班表的第一天
-  
     const td = document.createElement("td");
+  
+    if (dayObj.date === todayStr) {
+        td.classList.add("today-cell");
+    }
     
     // 1) 左上角 显示月份 (若 day=1 or isFirstDay)
     if (isFirstDay || dayObj.day === 1) {
