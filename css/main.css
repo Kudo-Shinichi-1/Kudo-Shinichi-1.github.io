@@ -4,6 +4,11 @@ body {
 	width: 70%;
 	background-color: rgb(223,228,196);
 }
+@media {
+	body {
+		width: 85%;
+	}
+  }
 nav ul, footer ul {
 	font-family: 'Source Han Sans CN', 'WenQuanYi Zen Hei', 'WenQuanYi Micro Hei', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
 	padding: 0px;

@@ -172,3 +172,72 @@
     /* 半透明的亮绿色，rgba(144, 238, 144, 0.5) 是一种亮绿色，0.5 表示半透明 */
   }
   
+
+/* ================================
+   移动端自适应 (Media Queries)
+   你可根据不同屏幕尺寸做不同调整
+   以下示例仅做基础参考
+================================ */
+@media only screen and (max-width: 600px) {
+    /* 1. 折叠面板在小屏时更窄一些 */
+    .folding-panel {
+      width: 140px;
+      right: -20%;
+    }
+    .folding-panel.folded {
+      transform: translateX(120px);
+    }
+    .folding-panel-tab {
+      left: -40px;
+      font-size: 1rem;
+    }
+  
+    /* 2. 表格单元格高度 & 字号调小 */
+    .schedule-table th,
+    .schedule-table td {
+      height: 60px;
+    }
+    .day-date {
+      font-size: 1rem;
+    }
+    .day-summary {
+      font-size: 1rem;
+      margin-top: 1em;
+    }
+  
+    /* 3. 如果想让表头也随屏幕尺寸改变 */
+    .schedule-table th {
+      padding: 4px;
+      font-size: 0.9rem;
+    }
+  
+    /* 4. 若页面依然太宽，可强制水平方向滚动:
+       (上面 .schedule-table { overflow-x: auto; } 已经启用)
+     */
+    /* 5. 其他可选: .schedule-container { padding: 4px; } */
+  }
+  
+  @media only screen and (max-width: 400px) {
+    /* 针对更小的屏幕，可以进一步缩小字体或改变布局 */
+    .folding-panel {
+      width: 120px;
+    }
+    .folding-panel.folded {
+      transform: translateX(100px);
+    }
+    .folding-panel-tab {
+      left: -35px;
+      font-size: 0.9rem;
+    }
+    .schedule-table td {
+      height: 50px;
+    }
+    .day-date,
+    .day-month {
+      font-size: 0.9rem;
+    }
+    .day-summary {
+      font-size: 0.9rem;
+      margin-top: 0.8em;
+    }
+  }
