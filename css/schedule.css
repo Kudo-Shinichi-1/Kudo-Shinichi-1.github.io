@@ -1,0 +1,174 @@
+/* ================================
+   schedule.css  (带详细注释)
+   ================================
+*/
+
+/* 
+.schedule-container
+  - 作为排班日历和折叠页的外层容器，
+  - 可以设置宽度/高度、背景、边框、阴影等整体风格
+*/
+.schedule-container {
+    position: relative;           /* 让内部子元素(如折叠面板)可定位 */
+    margin: 0 auto;               /* 让容器居中 (若有固定宽度) */
+    max-width: 1000px;            /* 容器最大宽度，防止在大屏上过宽 */
+    padding: 8px;                 /* 内边距，避免内容紧贴容器边缘 */
+    background-color: rgba(255, 255, 255, 0.5); /* 半透明白色背景 */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15); 
+    /* box-shadow: 给容器一个微妙阴影，可让页面层次更分明 */
+  }
+  
+  /* ================================
+     日历表格基础样式
+     ================================
+  .schedule-table 只是一个占位 .table
+  内部需要 JavaScript 动态插入 <table> 结构
+  */
+  .schedule-table table {
+    border-collapse: collapse; /* 表格合并边框，避免双线 */
+    width: 100%;               /* 表格宽度填满父容器 */
+    table-layout: fixed;       /* 让每列宽度固定，平均分配 (若想自适应内容，可改为auto) */
+  }
+  
+  .schedule-table th,
+  .schedule-table td {
+    border: 2.5px solid rgb(0,86,31);    /* 单元格边框，颜色为中大绿 */
+    vertical-align: top;       /* 单元格内容顶端对齐 */
+    position: relative;        /* 便于内部元素绝对定位(如 .day-date) */
+    height: 80px;             /* 每个单元格固定高度(可自行调节) */
+    text-align: center;        /* 文本居中对齐 */
+    overflow: hidden;          /* 超出部分隐藏，防止文字溢出 */
+    transition: background 0.2s; 
+    /* 鼠标悬停或其他动态改变时，背景色可平滑过渡0.2秒 */
+  }
+  
+  /* 表头 th 的样式 */
+  .schedule-table th {
+    height: auto;             /* 表头高度自动设定 */
+    background: rgb(0,86,31); /* 深色背景 */
+    color: #fff; /* 浅色字 */
+    font-weight: 600;    /* 加粗，让表头更醒目 */
+    padding: 6px;        /* 表头内边距，可自行调节 */
+  }
+  
+  /* ================================
+     日期数字 (右上角)
+     ================================
+  .day-date 用于在单元格右上角显示日期
+  */
+  .day-date {
+    position: absolute;
+    top: 2px;       /* 离单元格顶部 2px */
+    right: 4px;     /* 离单元格右边 4px */
+    font-size: 1.2rem;  /* 字体稍微小一点 */
+    font-weight: 1000;  /* 粗体以示区分 */
+    color: rgb(0,86,31);    /* 颜色中大绿 */
+  }
+  
+  /* 在示例JS中没有单独用到 .day-month 
+     若你想在每月第一天显示月份，可在JS中加一个 span.day-month
+  */
+  .day-month {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 1.2rem;
+    font-weight: 1000;
+    color: rgb(3, 183, 69);
+  }
+  
+  
+  /* ================================
+     排班摘要 (单元格中央)
+     ================================
+  .day-summary 用于显示 “五组上班” 这种文字
+  */
+  .day-summary {
+    font-size: 1.2rem;    /* 字体略大 */
+    font-weight: normal;  /* 不加粗 */
+    display: inline-block;
+    margin-top: 1.4em;    /* 往下移，让日期数字在右上角 */
+  }
+  
+  /* ================================
+     折叠页 folding-panel
+     默认位于容器右侧，可通过 transform/translateX 实现展开或折叠
+  */
+  .folding-panel {
+    position: absolute;       /* 相对于 .schedule-container 定位 */
+    top: 0;                   /* 与父容器顶部对齐 */
+    right: -25%;             /* 整体在容器右侧以外，如果想默认可见，可设成 0 */
+    width: 170px;            /* 面板本身宽度 (可调整得更宽一些) */
+    background-color: rgba(0, 86, 31, 0.7); /* 半透明白色背景 */
+    color: #fff; /* 浅色字 */
+    transition: transform 0.3s ease-in-out;  
+    /* 折叠或展开时 0.3秒平滑过渡 */
+    box-shadow: -4px 0 8px rgba(0,0,0,0.3); 
+    /* 面板左侧阴影，给点层次感 */
+  }
+  
+  /* 当有 folded 类时，我们把面板往右侧 translateX 移动 (实现“折叠”) */
+  .folding-panel.folded {
+    transform: translateX(150px);
+    /* 让面板刚好全部隐藏在右侧，只留出tab可点击 */
+  }
+  
+  /* ================================
+     折叠页上的标签 (tab)
+     让用户可以点击以展开/收起
+  */
+  .folding-panel-tab {
+    position: absolute;
+    top: 30%;                 /* 大致放在面板垂直居中的位置 (可调) */
+    left: -55px;             /* 保证该标签向左突出 55px  */
+    width: auto;             /* 内容宽度自适应; 竖排显示时尤其重要 */
+    
+    background: rgb(0,86,31); /* 深色背景 */
+    color: #fff; /* 浅色字 */
+
+    padding: 15px 10px;     
+    box-shadow: -4px 0 8px rgba(0,0,0,0.3); 
+    /* 面板左侧阴影，给点层次感 */
+    
+    /* 竖排文字：vertical-lr + upright  */
+    writing-mode: vertical-lr;  
+    text-orientation: upright;  
+    
+    cursor: pointer;          /* 鼠标悬停变手型 */
+    font-size: 1.1rem;        /* 字体适中 */
+    
+    transition: box-shadow 0.2s, left 0.3s;
+    /* 悬停时阴影变化 */
+  }
+  
+  /* 鼠标移到 tab 上时，让阴影加深，视觉反馈 */
+  .folding-panel-tab:hover {
+    box-shadow: -4px 0 8px rgba(0,0,0,0.5); 
+  }
+  
+  /* 折叠面板里面的内容 */
+  .folding-panel-content {
+    margin: 10px;
+    padding: 10px;
+  }
+  
+  /* 下面这些是折叠面板中具体元素的样式 */
+  #employeeChecklist label {
+    display: inline-block;
+    margin: 4px 8px;
+  }
+  
+  #countInfo {
+    margin-top: 8px;
+    line-height: 1.6; /* 行高，让文字更舒展 */
+  }
+  
+  /* ================================
+     高亮状态 (在JS中通过 .highlight 添加)
+     例如用户勾选某人时，高亮其上班日
+  */
+  .highlight {
+    background-color: rgba(126, 211, 126, 0.5) !important; 
+    /* 半透明的亮绿色，rgba(144, 238, 144, 0.5) 是一种亮绿色，0.5 表示半透明 */
+  }
+  
