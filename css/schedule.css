@@ -171,3 +171,14 @@
     background-color: rgba(126, 211, 126, 0.5) !important; 
     /* 半透明的亮绿色，rgba(144, 238, 144, 0.5) 是一种亮绿色，0.5 表示半透明 */
   }
+
+    /* 让今天的格子有一个浅蓝色背景、右上角字体加粗 */
+    .today-cell {
+        background-color: #e8f7ff;
+        border: 2px solid #3498db; /* 或别的颜色 */
+    }
+    .today-cell .day-date {
+        font-weight: bolder;
+        color: #2980b9;
+    }
+  
