@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8" />
+  <title>xiaoyao space - 排班表</title>
+  <!-- 引入通用CSS -->
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <link rel="stylesheet" type="text/css" href="../css/not_IE.css">
+  <!-- 排班相关CSS -->
+  <link rel="stylesheet" type="text/css" href="../css/schedule.css">
+  <link rel="shortcut icon" type="image/x-icon" href="../img/ilogo.bmp" media="screen" />
+</head>
+<body>
+
+  <!-- 主内容容器 -->
+  <div class="schedule-container">
+    <!-- 居中的标题 -->
+    <h1 style="text-align: center;">少警中心排班表</h1>
+    <!-- 下方居中的文字 -->
+    <p style="text-align: center;">（2025年2月14日更新 肖瑶）</p>
+
+    <!-- 日历表格会被JS动态插入到此处 -->
+    <div id="scheduleTable" class="schedule-table"></div>
+
+    <!-- 折叠页“筛选与统计”，默认折叠 -->
+    <div id="foldingPanel" class="folding-panel folded">
+      <div class="folding-panel-tab" id="foldingTab">筛选与统计</div>
+      <div class="folding-panel-content">
+        <h2>高亮君</h2>
+        <div id="employeeChecklist"></div>
+
+        <hr>
+        <h2>计数君</h2>
+        <div id="countInfo"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <br><br><br><br>
+    <table class="bc" align="center">
+      <tr>
+        <th>
+          <script type="text/javascript" src="https://ipaddress.is/js/ipwidget.js"></script>
+          <script type="text/javascript">
+            var ip_widget_var = ip_widget_var || [];
+            ip_widget("rgb(223,228,196)","rgb(209,215,181)","rgb(223,228,196)",0,0,800);
+          </script>
+          <noscript><a href="https://ipaddress.is">IP Address Lookup</a></noscript>
+        </th>
+      </tr>
+    </table>
+  </footer>
+
+  <!-- 放在 body 最后，引入 schedule.js -->
+  <script src="../js/schedule.js"></script>
+</body>
+</html>
