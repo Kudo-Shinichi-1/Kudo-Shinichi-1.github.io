@@ -3,6 +3,16 @@
    ================================
 */
 
+body {
+	font-family: 'Source Han Sans CN', 'WenQuanYi Zen Hei', 'WenQuanYi Micro Hei', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+	margin: 380px auto;
+	width: 70%;
+	background-color: rgb(223,228,196);
+	background-image:url('../img/background.jpg');
+	background-size:contain;
+	background-repeat:no-repeat;
+}
+
 /* 
 .schedule-container
   - 作为排班日历和折叠页的外层容器，
@@ -95,6 +105,7 @@
      默认位于容器右侧，可通过 transform/translateX 实现展开或折叠
   */
   .folding-panel {
+    border-radius: 4px;
     position: absolute;       /* 相对于 .schedule-container 定位 */
     top: 0;                   /* 与父容器顶部对齐 */
     right: -25%;             /* 整体在容器右侧以外，如果想默认可见，可设成 0 */
@@ -122,6 +133,7 @@
     top: 30%;                 /* 大致放在面板垂直居中的位置 (可调) */
     left: -55px;             /* 保证该标签向左突出 55px  */
     width: auto;             /* 内容宽度自适应; 竖排显示时尤其重要 */
+    border-radius: 4px;
     
     background: rgb(0,86,31); /* 深色背景 */
     color: #fff; /* 浅色字 */
@@ -181,4 +193,85 @@
         font-weight: bolder;
         color: #2980b9;
     }
+
+
+/* 导航栏外容器 */
+.month-nav {
+    display: flex;                 /* 横向排列 */
+    justify-content: space-between; /* 让子元素两端对齐 */
+    align-items: center;           /* 垂直居中 */
+
+    height: auto;             /* 表尾高度自动设定 */
+    background: rgb(0,86,31); /* 深色背景 */
+    color: #fff; /* 浅色字 */
+    font-weight: 600;    /* 加粗，让表头更醒目 */
+    padding: 6px;        /* 表尾内边距，可自行调节 */
+  }
+  
+  /* 导航栏内的按钮统一样式 */
+  .month-nav button {
+    background-color: rgb(0, 109, 40);
+    color: #eee;
+    border: none;                  /* 去掉边框 */
+    padding: 6px 16px;
+    margin: 0 8px;                 /* 按钮间隔 */
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+    font-weight: 600;
+  }
+  
+  /* 悬停效果 */
+  .month-nav button:hover:not(:disabled) {
+    background-color: rgb(4, 126, 48);        /* 鼠标移上去稍微再浅一点 */
+  }
+  
+  /* 禁用状态的按钮 */
+  .month-nav button:disabled {
+    opacity: 0.5;                  /* 半透明 */
+    cursor: not-allowed;
+  }
+  
+  /* 月份标题 */
+  .month-nav #monthTitle {
+    font-weight: 600;
+  }
+  
+
+
+/* 下面针对手机屏幕 (max-width: 768px) 进行覆盖 */
+@media (max-width: 768px) {
+    body {
+      margin: 280px auto;
+      width: 85% ;    /* 让移动端横向占满 */
+    }
+    .folding-panel {
+        border-radius: 4px;
+        position: absolute;       /* 相对于 .schedule-container 定位 */
+        top: 0;                   /* 与父容器顶部对齐 */
+        right: -15%;             /* 整体在容器右侧以外，如果想默认可见，可设成 0 */
+        width: 170px;            /* 面板本身宽度 (可调整得更宽一些) */
+        background-color: rgba(0, 86, 31, 0.7); /* 半透明白色背景 */
+        color: #fff; /* 浅色字 */
+        transition: transform 0.3s ease-in-out;  
+        /* 折叠或展开时 0.3秒平滑过渡 */
+        box-shadow: -4px 0 8px rgba(0,0,0,0.3); 
+        /* 面板左侧阴影，给点层次感 */
+      }
+      
+      /* 当有 folded 类时，我们把面板往右侧 translateX 移动 (实现“折叠”) */
+      .folding-panel.folded {
+        transform: translateX(150px);
+        /* 让面板刚好全部隐藏在右侧，只留出tab可点击 */
+    }
+    html {
+        -webkit-text-size-adjust: 100%;
+        /* 禁止iOS Safari自动放大小字体 */
+        font-size: 16px; /* 或你的默认字号 */
+    } 
+    .ip-table {
+        width: 100%; /* 让表格宽度自适应屏幕 */
+        max-width: 100%; /* 确保表格不会超出屏幕宽度 */
+    }
+  }
   
