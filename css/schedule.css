@@ -265,9 +265,8 @@ body {
         /* 让面板刚好全部隐藏在右侧，只留出tab可点击 */
     }
     html {
-        /* -webkit-text-size-adjust: 100%; */
-        /* 禁止iOS Safari自动放大小字体 */
-        font-size: 15px; /* 或你的默认字号 */
+        -webkit-text-size-adjust: 100%;
+        font-size: 14px; /* 或你的默认字号 */
     } 
     .ip-table {
         width: 100%; /* 让表格宽度自适应屏幕 */
