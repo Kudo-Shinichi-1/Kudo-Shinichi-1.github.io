@@ -93,7 +93,7 @@ function groupByYearMonth(scheduleData) {
   sortedKeys.forEach(k => {
     let group = map.get(k);
     // 对 group.days 再根据 dayObj.day 排序
-    group.days.sort((a,b) => a.day - b.day);
+    group.days.sort((a, b) => a.day - b.day);
     result.push(group);
   });
   return result;
@@ -132,10 +132,10 @@ function showMonth(index) {
   // 5. 构建表格: <table><thead><tbody>...
   const table = document.createElement("table");
 
-  // thead
+  // thead —— 修改表头为以周日为第一天
   const thead = document.createElement("thead");
   const headRow = document.createElement("tr");
-  ["周一","周二","周三","周四","周五","周六","周日"].forEach(dayName => {
+  ["周日", "周一", "周二", "周三", "周四", "周五", "周六"].forEach(dayName => {
     const th = document.createElement("th");
     th.textContent = dayName;
     headRow.appendChild(th);
@@ -150,12 +150,11 @@ function showMonth(index) {
   let currentRow = document.createElement("tr");
   let filledDays = 0;
 
-  for (let i=0; i<allMonthDays.length; i++) {
+  for (let i = 0; i < allMonthDays.length; i++) {
     const dayObj = allMonthDays[i];
     // 构造单元格
     // isFirstDay指合并数组后的第0项 => 不一定真正是该月首日
-    // 如果需要严格判断 => dayObj是否与days[0]相同？
-    const isFirstDay = (i===0);
+    const isFirstDay = (i === 0);
 
     const td = buildDayCell(dayObj, isFirstDay);
     currentRow.appendChild(td);
@@ -167,7 +166,7 @@ function showMonth(index) {
     }
   }
 
-  // 补齐最后一行
+  // 补齐最后一行空单元格
   while (filledDays % 7 !== 0) {
     currentRow.appendChild(document.createElement("td"));
     filledDays++;
@@ -184,48 +183,52 @@ function showMonth(index) {
 }
 
 /*************************************
- * 函数：获取上月末记录
+ * 函数：获取上月末记录（补齐前导空格）
  *************************************/
 function getLeadingDays(firstDayObj, dayMap) {
   const leading = [];
-  const needCount = firstDayObj.weekday; // weekday=0..6, 0=周一 =>不需要补
+  // 原始数据的 weekday 约定：0=周一,...,6=周日
+  // 转换为以周日为首的系统：newWeekday = (oldWeekday + 1) % 7
+  const newWeekday = (firstDayObj.weekday + 1) % 7;
+  const needCount = newWeekday; // 比如：如果第一天为周一（old=0,new=1），则需要补 1 天（上周日）
   if (needCount <= 0) return leading;
 
-  // 往前 i 天
+  // 往前补 needCount 天
   let baseDate = new Date(firstDayObj.date); // e.g. 2025-03-01
   for (let i = 1; i <= needCount; i++) {
     let prevDate = new Date(baseDate);
     prevDate.setDate(prevDate.getDate() - i);
-    let ymd = prevDate.toISOString().slice(0,10);
+    let ymd = prevDate.toISOString().slice(0, 10);
     if (dayMap.has(ymd)) {
       leading.push(dayMap.get(ymd));
     } else {
-      // 数据中无此日 => 看你需求，可 break
-      // break; // or continue;
+      // 数据中无此日 => 可根据需求处理
     }
   }
-  // leading是逆序 => 翻转
+  // leading 是逆序，需要翻转
   leading.reverse();
   return leading;
 }
 
 /*************************************
- * 函数：获取下月初记录
+ * 函数：获取下月初记录（补齐尾部空格）
  *************************************/
 function getTrailingDays(lastDayObj, dayMap) {
   const trailing = [];
-  const needCount = 6 - lastDayObj.weekday; // weekday=6=周日=>0
+  // 转换 lastDayObj.weekday 同上
+  const newWeekday = (lastDayObj.weekday + 1) % 7;
+  const needCount = 6 - newWeekday; // 比如：如果最后一天为周日（old=6,new=0），则需要补 6 天
   if (needCount <= 0) return trailing;
 
   let baseDate = new Date(lastDayObj.date);
   for (let i = 1; i <= needCount; i++) {
     let nxtDate = new Date(baseDate);
     nxtDate.setDate(nxtDate.getDate() + i);
-    let ymd = nxtDate.toISOString().slice(0,10);
+    let ymd = nxtDate.toISOString().slice(0, 10);
     if (dayMap.has(ymd)) {
       trailing.push(dayMap.get(ymd));
     } else {
-      // break; or continue;
+      // 数据中无此日 => 可根据需求处理
     }
   }
   return trailing;
@@ -237,15 +240,14 @@ function getTrailingDays(lastDayObj, dayMap) {
 function buildDayCell(dayObj, isFirstDay) {
   const td = document.createElement("td");
 
-  // 如果是今日 => 加class
-  const todayStr = new Date().toISOString().slice(0,10);
+  // 如果是今日 => 加 class
+  const todayStr = new Date().toISOString().slice(0, 10);
   if (dayObj.date === todayStr) {
     td.classList.add("today-cell");
   }
 
-  // 若 day=1 or isFirstDay => 显示 "X月"
-  //   if (isFirstDay || dayObj.day === 1) {
-  if (dayObj.day === 1) { // 只在每月第1天显示月份了
+  // 若 day=1 => 显示 "X月"
+  if (dayObj.day === 1) { // 只在每月第1天显示月份
     const monthSpan = document.createElement("div");
     monthSpan.className = "day-month";
     monthSpan.textContent = `${dayObj.month}月`;
@@ -266,7 +268,7 @@ function buildDayCell(dayObj, isFirstDay) {
 
   // data-names 用于后续高亮
   let allWorkers = dayObj.work_people.replace(/、/g, ",");
-  allWorkers = allWorkers.split(",").map(x=>x.trim()).filter(Boolean);
+  allWorkers = allWorkers.split(",").map(x => x.trim()).filter(Boolean);
   td.setAttribute("data-names", allWorkers.join("|"));
 
   return td;
@@ -307,10 +309,10 @@ function initFoldingPanel(scheduleData) {
   const allNames = new Set();
   scheduleData.forEach(d => {
     d.work_people.replace(/、/g, ",").split(",").forEach(n => {
-      if(n.trim()) allNames.add(n.trim());
+      if (n.trim()) allNames.add(n.trim());
     });
     d.rest_people.replace(/、/g, ",").split(",").forEach(n => {
-      if(n.trim()) allNames.add(n.trim());
+      if (n.trim()) allNames.add(n.trim());
     });
   });
   const nameList = Array.from(allNames);
@@ -333,9 +335,9 @@ function initFoldingPanel(scheduleData) {
 
   // 计数君
   const countInfo = document.getElementById("countInfo");
-  const todayStr = new Date().toISOString().slice(0,10);
+  const todayStr = new Date().toISOString().slice(0, 10);
   let bestRecord = null;
-  for (let i=0; i<scheduleData.length; i++) {
+  for (let i = 0; i < scheduleData.length; i++) {
     if (scheduleData[i].date <= todayStr) {
       bestRecord = scheduleData[i];
     } else {

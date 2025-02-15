@@ -243,13 +243,13 @@ body {
 @media (max-width: 768px) {
     body {
       margin: 280px auto;
-      width: 85% ;    /* 让移动端横向占满 */
+      width: 80% ;   
     }
     .folding-panel {
         border-radius: 4px;
         position: absolute;       /* 相对于 .schedule-container 定位 */
         top: 0;                   /* 与父容器顶部对齐 */
-        right: -15%;             /* 整体在容器右侧以外，如果想默认可见，可设成 0 */
+        right: -20%;             /* 整体在容器右侧以外，如果想默认可见，可设成 0 */
         width: 170px;            /* 面板本身宽度 (可调整得更宽一些) */
         background-color: rgba(0, 86, 31, 0.7); /* 半透明白色背景 */
         color: #fff; /* 浅色字 */
@@ -265,9 +265,9 @@ body {
         /* 让面板刚好全部隐藏在右侧，只留出tab可点击 */
     }
     html {
-        -webkit-text-size-adjust: 100%;
+        /* -webkit-text-size-adjust: 100%; */
         /* 禁止iOS Safari自动放大小字体 */
-        font-size: 16px; /* 或你的默认字号 */
+        font-size: 15px; /* 或你的默认字号 */
     } 
     .ip-table {
         width: 100%; /* 让表格宽度自适应屏幕 */
